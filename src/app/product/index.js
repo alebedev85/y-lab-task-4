@@ -26,14 +26,11 @@ function Product() {
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
   }
 
-
-
   const select = useSelector(state => ({
     count: state.catalog.count,
     amount: state.basket.amount,
     sum: state.basket.sum
   }));
-
 
   return (
     <PageLayout>
