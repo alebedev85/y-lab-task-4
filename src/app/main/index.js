@@ -15,8 +15,8 @@ function Main() {
   const { page = 1 } = useParams();
 
   useEffect(() => {
-    store.actions.catalog.load();
-  }, []);
+    store.actions.catalog.load(page);
+  }, [page]);
 
   const select = useSelector(state => ({
     list: state.catalog.list,

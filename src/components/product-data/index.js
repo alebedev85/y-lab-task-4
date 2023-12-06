@@ -4,22 +4,24 @@ import propTypes from "prop-types";
 import './style.css';
 
 export default function ProductData({ data, onAddItem }) {
+
   const cn = bem('product-data');
+
   return (
     <div className={cn()}>
-      <p className={cn('description')}>{data.description}</p>
-      <p className={cn('country')}>
+      <div className={cn('description')}>{data.description}</div>
+      <div className={cn('country')}>
         Страна производитель: <span className={cn('country-value')}>{data.country}</span>
-      </p>
-      <p className={cn('category')}>
+      </div>
+      <div className={cn('category')}>
         Категория: <span className={cn('category-value')}>{data.category}</span>
-      </p>
-      <p className={cn('year')}>
+      </div>
+      <div className={cn('year')}>
         Год выпуска: <span className={cn('year-value')}>{data.year}</span>
-      </p>
-      <p className={cn('price')}>
+      </div>
+      <div className={cn('price')}>
         Цена: <span className={cn('price-value')}>{data.price}</span>
-      </p>
+      </div>
       <button className={cn('button')} onClick={onAddItem}>Добавить</button>
     </div >
   )

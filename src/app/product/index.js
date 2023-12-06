@@ -5,19 +5,28 @@ import BasketTool from "../../components/basket-tool";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import ProductData from '../../components/product-data';
-import { useLoaderData } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-function Product(params) {
-  const { data } = useLoaderData({});
-  console.log('data: ', data);
+function Product() {
 
   const store = useStore();
+  const { id } = useParams();
+
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    store.actions.catalog.loadItemData(id)
+    .then((res) => setData(res))
+  }, []);
+
   const callbacks = {
     // Добавление в корзину
-    addToBasket: useCallback(() => store.actions.basket.addToBasket(data.id), [store]),
+    addToBasket: useCallback(() => store.actions.basket.addToBasket(id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
   }
+
+
 
   const select = useSelector(state => ({
     count: state.catalog.count,
