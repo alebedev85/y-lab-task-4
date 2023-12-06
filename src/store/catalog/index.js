@@ -14,13 +14,51 @@ class Catalog extends StoreModule {
     }
   }
 
-  async load() {
-    const response = await fetch('/api/v1/articles');
+  async load(pageNum = 1) {
+    const response = await fetch(`/api/v1/articles?limit=10&skip=${10 * (pageNum - 1)}&fields=items(_id, title, price),count`);
     const json = await response.json();
     this.setState({
       ...this.getState(),
-      list: json.result.items
+      list: json.result.items,
+      count: json.result.count
     }, 'Загружены товары из АПИ');
+  }
+
+  // запрос по API отдельного товара
+  async loadItemData(id) {
+    if (!id) return {};
+    const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
+
+    const json = await response.json();
+
+    const result = {
+      id,
+      description: json.result.description,
+      title: json.result.title,
+      country: json.result.madeIn.title,
+      category: json.result.category.title,
+      year: json.result.edition,
+      price: json.result.price,
+    }
+    return result;
+  }
+
+  async loadItemData(id) {
+    if (!id) return {};
+    const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
+
+    const json = await response.json();
+
+    const result = {
+      id,
+      description: json.result.description,
+      title: json.result.title,
+      country: json.result.madeIn.title,
+      category: json.result.category.title,
+      year: json.result.edition,
+      price: json.result.price,
+    }
+    return result;
   }
 }
 
