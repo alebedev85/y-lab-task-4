@@ -1,16 +1,17 @@
-import {codeGenerator} from "../../utils";
+import { codeGenerator } from "../../utils";
 import StoreModule from "../module";
 
 class Catalog extends StoreModule {
 
   constructor(store, name) {
     super(store, name);
-    this.generateCode = codeGenerator(0)
+    this.generateCode = codeGenerator(0);
   }
 
   initState() {
     return {
-      list: []
+      list: [],
+      product: {},
     }
   }
 
@@ -31,34 +32,21 @@ class Catalog extends StoreModule {
 
     const json = await response.json();
 
-    const result = {
-      id,
-      description: json.result.description,
-      title: json.result.title,
-      country: json.result.madeIn.title,
-      category: json.result.category.title,
-      year: json.result.edition,
-      price: json.result.price,
-    }
-    return result;
-  }
-
-  async loadItemData(id) {
-    if (!id) return {};
-    const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
-
-    const json = await response.json();
-
-    const result = {
-      id,
-      description: json.result.description,
-      title: json.result.title,
-      country: json.result.madeIn.title,
-      category: json.result.category.title,
-      year: json.result.edition,
-      price: json.result.price,
-    }
-    return result;
+    this.setState({
+      ...this.getState(),
+      list: json.result.items,
+      count: json.result.count,
+      product: {
+        id,
+        description: json.result.description,
+        title: json.result.title,
+        country: json.result.madeIn.title,
+        category: json.result.category.title,
+        year: json.result.edition,
+        price: json.result.price,
+      }
+    }, 'Загружено описание товара');
+    // return result;
   }
 }
 

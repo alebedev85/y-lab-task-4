@@ -16,8 +16,13 @@ function Product() {
 
   useEffect(() => {
     store.actions.catalog.loadItemData(id)
-    .then((res) => setData(res))
   }, []);
+
+  const select = useSelector(state => ({
+    product: state.catalog.product,
+    amount: state.basket.amount,
+    sum: state.basket.sum
+  }));
 
   const callbacks = {
     // Добавление в корзину
@@ -26,18 +31,12 @@ function Product() {
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
   }
 
-  const select = useSelector(state => ({
-    count: state.catalog.count,
-    amount: state.basket.amount,
-    sum: state.basket.sum
-  }));
-
   return (
     <PageLayout>
       <Head title={data.title} />
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
         sum={select.sum} />
-      <ProductData data={data} onAddItem={callbacks.addToBasket} />
+      <ProductData product={select.product} onAddItem={callbacks.addToBasket} />
     </PageLayout>
 
   );

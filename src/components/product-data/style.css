@@ -1,5 +1,7 @@
 .product-data {
-  padding: 40px;
+  padding-top: 21px;
+  padding-left: 35px;
+  padding-right: 35px;
   display: flex;
   gap: 20px;
   flex-direction: column;
@@ -9,11 +11,6 @@
   line-height: 21px;
 }
 
-.product-data * {
-  margin: 0;
-  padding: 0;
-}
-
 .product-data-category-value,
 .product-data-country-value,
 .product-data-price,
@@ -21,10 +18,12 @@
   font-weight: 700;
 }
 
-.product-data-price{
+.product-data-price {
   font-size: 24px;
 }
 
 .product-data-button {
   padding: 2px 9px;
+  width: 76px;
+  height: 21px;
 }

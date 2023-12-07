@@ -7,7 +7,6 @@ import { NavLink } from 'react-router-dom';
 
 function Pagination({ totalPages, currentPageIndex }) {
   const cn = bem('pagination');
-  console.log(totalPages, currentPage);
   const { pages, currentPage } = pagesListGenerator(currentPageIndex, totalPages);
   return (
     pages ?
