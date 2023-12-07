@@ -1,26 +1,27 @@
-import { memo, useCallback, useEffect } from "react";
+import { memo } from "react";
 import { cn as bem } from '@bem-react/classname';
 import PropTypes from 'prop-types';
 import './style.css';
-import { generatePagesList } from '../../utils'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { pagesListGenerator } from '../../utils'
+import { NavLink } from 'react-router-dom';
 
-function Pagination({ totalPages, currentPage }) {
+function Pagination({ totalPages, currentPageIndex }) {
   const cn = bem('pagination');
-
-  const { pages, currPageIndex } = generatePagesList(currentPage, totalPages);
-  if (!pages) return null;
+  console.log(totalPages, currentPage);
+  const { pages, currentPage } = pagesListGenerator(currentPageIndex, totalPages);
   return (
-    <ul className={cn()}>
-      {pages.map((page, index) => (
-        <li key={index} className={cn(index === currPageIndex ? 'page active' : 'page')}>
-          {page === '...' ? <span className='no-link'> {page}</span> :
-            <NavLink to={`/${page}`} className={cn('link')}> {page} </NavLink>
-          }
-        </li>
-      ))
-      }
-    </ul >
+    pages ?
+      <ul className={cn()}>
+        {pages.map((page, index) => (
+          <li key={index} className={cn('index', index === currentPage ? 'active' : '')}>
+            {page === '...' ? <span className='dots'> {page} </span> :
+              <NavLink to={`/${page}`} className={cn('link')}> {page} </NavLink>
+            }
+          </li>
+        ))
+        }
+      </ul > :
+      <></>
   )
 }
 

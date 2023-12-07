@@ -34,38 +34,28 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
 
-export function generatePagesList(curr, max) {
-  if (!curr || !max) return [];
-  let currPageIndex;
-  let pages;
-  if (max <= 7) {
-    for (let i = 1; i <= max; i++) {
-      pages.push(i);
-      return { pages, currPageIndex: curr - 1 };
-    }
-  } else {
+export function pagesListGenerator(current, max) {
+  if (!current || !max) return [];
+  let currentPage = 0;
+  let pages = {};
 
-    if (curr < 3) {
-      pages = [1, 2, 3, '...', max];
-      currPageIndex = curr
-    }
-    if (curr === 3) {
-      pages = [1, 2, 3, 4, '...', max];
-      currPageIndex = 3
-    }
-    if (curr > 3 && curr < max - 2) {
-      pages = [1, '...', curr - 1, curr, curr + 1, '...', max];
-      currPageIndex = 4
-    }
-    if (curr === max - 2) {
-      pages = [1, '...', curr - 1, curr, curr + 1, max];
-      currPageIndex = 4
-    }
-    if (curr > max - 2) {
-      pages = [1, '...', max - 2, max - 1, max];
-      currPageIndex = 5 - (max - curr)
-    }
-    currPageIndex -= 1;
+  if (current < 3) {
+    pages = [1, 2, 3, '...', max];
+    currentPage = current
+  } else if (current === 3) {
+    pages = [1, 2, 3, 4, '...', max];
+    currentPage = 3
+  } else if (current > 3 && current < max - 2) {
+    pages = [1, '...', current - 1, current, current + 1, '...', max];
+    currentPage = 4
+  } else if (current === max - 2) {
+    pages = [1, '...', current - 1, current, current + 1, max];
+    currentPage = 4
+  } else {
+    pages = [1, '...', max - 2, max - 1, max];
+    currentPage = 5 - (max - current)
   }
-  return { pages, currPageIndex }
+  currentPage -= 1;
+
+  return { pages, currentPage }
 }
