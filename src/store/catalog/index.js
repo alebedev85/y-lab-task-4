@@ -29,13 +29,9 @@ class Catalog extends StoreModule {
   async loadItemData(id) {
     if (!id) return {};
     const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
-
     const json = await response.json();
-
     this.setState({
       ...this.getState(),
-      list: json.result.items,
-      count: json.result.count,
       product: {
         id,
         description: json.result.description,

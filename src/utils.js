@@ -34,26 +34,26 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
 
-export function pagesListGenerator(current, max) {
-  if (!current || !max) return [];
-  let currentPage = 0;
-  let pages = {};
+export function pagesListGenerator(currentPageIndex, totalPages) {
+  if (!currentPageIndex || !totalPages) return [];
+  let currentPage;
+  let pages;
 
-  if (current < 3) {
-    pages = [1, 2, 3, '...', max];
-    currentPage = current
-  } else if (current === 3) {
-    pages = [1, 2, 3, 4, '...', max];
+  if (currentPageIndex < 3) {
+    pages = [1, 2, 3, '...', totalPages];
+    currentPage = currentPageIndex
+  } else if (currentPageIndex === 3) {
+    pages = [1, 2, 3, 4, '...', totalPages];
     currentPage = 3
-  } else if (current > 3 && current < max - 2) {
-    pages = [1, '...', current - 1, current, current + 1, '...', max];
+  } else if (currentPageIndex > 3 && currentPageIndex < totalPages - 2) {
+    pages = [1, '...', currentPageIndex - 1, currentPageIndex, currentPageIndex + 1, '...', totalPages];
     currentPage = 4
-  } else if (current === max - 2) {
-    pages = [1, '...', current - 1, current, current + 1, max];
+  } else if (currentPageIndex === totalPages - 2) {
+    pages = [1, '...', currentPageIndex - 1, currentPageIndex, currentPageIndex + 1, totalPages];
     currentPage = 4
   } else {
-    pages = [1, '...', max - 2, max - 1, max];
-    currentPage = 5 - (max - current)
+    pages = [1, '...', totalPages - 2, totalPages - 1, totalPages];
+    currentPage = 5 - (totalPages - currentPageIndex)
   }
   currentPage -= 1;
 
