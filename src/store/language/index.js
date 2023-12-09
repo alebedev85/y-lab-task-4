@@ -17,37 +17,31 @@ class Language extends StoreModule {
   }
 
   switchLanguage() {
-    this.setState({
-      lang: this.getState().lang === 'ru' ? 'en' : 'ru',
-    })
-  }
-
-  setLanguage() {
-    if (this.getState().lang === 'ru') {
+    if (this.getState().lang === 'en') {
       this.setState({
-        ...this.getState(),
-          lang: 'ru',
-          list: {
-            store: 'Магазин',
-            add: 'Добавить',
-            delete: 'Удалить',
-            follow: 'Перейти',
-            close: 'Закрыть'
-          }
+        lang: 'ru',
+        list: {
+          store: 'Магазин',
+          basket: "Карзина",
+          add: 'Добавить',
+          delete: 'Удалить',
+          follow: 'Перейти',
+          close: 'Закрыть'
+        }
 
-      }, 'Переключен язык на на руский')
+      }, 'Переключился на на руский язык')
     } else {
       this.setState({
-        ...this.getState(),
-          lang: 'en',
-          list: {
-            store: 'Store',
-            add: 'Add',
-            delete: 'Delete',
-            follow: 'Follow',
-            close: 'Close'
-          }
-      }, 'Переключен язык на английски')
+        lang: 'en',
+        list: {
+          store: 'Store',
+          basket: "Basket",
+          add: 'Add',
+          delete: 'Delete',
+          follow: 'Follow',
+          close: 'Close'
+        }
+      }, 'Переключился на английски язык')
     }
   }
 

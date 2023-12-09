@@ -5,7 +5,7 @@ import { numberFormat, plural } from "../../utils";
 import { Link } from "react-router-dom";
 import './style.css';
 
-function BasketTool({ sum, amount, onOpen }) {
+function BasketTool({ sum, amount, onOpen, textButton }) {
   const cn = bem('BasketTool');
   return (
     <div className={cn()}>
@@ -22,7 +22,7 @@ function BasketTool({ sum, amount, onOpen }) {
             : `пусто`
           }
         </span>
-        <button onClick={onOpen}>Перейти</button>
+        <button onClick={onOpen}>{textButton}</button>
       </div>
     </div>
   );
@@ -31,13 +31,15 @@ function BasketTool({ sum, amount, onOpen }) {
 BasketTool.propTypes = {
   onOpen: PropTypes.func.isRequired,
   sum: PropTypes.number,
-  amount: PropTypes.number
+  amount: PropTypes.number,
+  textButton: PropTypes.string
 };
 
 BasketTool.defaultProps = {
   onOpen: () => { },
   sum: 0,
-  amount: 0
+  amount: 0,
+  textButton: 'Перейти'
 }
 
 export default memo(BasketTool);

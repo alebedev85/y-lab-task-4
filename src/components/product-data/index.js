@@ -1,9 +1,9 @@
 import React from 'react'
-import { cn as bem} from '@bem-react/classname';
+import { cn as bem } from '@bem-react/classname';
 import propTypes from "prop-types";
 import './style.css';
 
-export default function ProductData({ product, onAddItem }) {
+export default function ProductData({ product, onAddItem, textButton }) {
 
   const cn = bem('product-data');
 
@@ -22,7 +22,7 @@ export default function ProductData({ product, onAddItem }) {
       <div className={cn('price')}>
         Цена: <span className={cn('price-value')}>{product.price}</span>
       </div>
-      <button className={cn('button')} onClick={onAddItem}>Добавить</button>
+      <button className={cn('button')} onClick={onAddItem}>{textButton}</button>
     </div >
   )
 }
@@ -36,7 +36,12 @@ ProductData.propTypes = {
     country: propTypes.string,
     category: propTypes.string,
     year: propTypes.number
-  })
+  }),
+  onAddItem: propTypes.func.isRequired,
+  textButton: propTypes.string
+};
 
-
+ProductData.defaultProps = {
+  onAddItem: () => { },
+  textButton: 'Добавить',
 }

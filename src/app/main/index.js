@@ -23,6 +23,7 @@ function Main() {
     amount: state.basket.amount,
     sum: state.basket.sum,
     count: state.catalog.count,
+    lang: state.language.list,
   }));
 
   const callbacks = {
@@ -34,15 +35,15 @@ function Main() {
 
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket} />
-    }, [callbacks.addToBasket]),
+      return <Item item={item} onAdd={callbacks.addToBasket} textButton={select.lang.add}/>
+    }, [callbacks.addToBasket, select.lang]),
   };
 
   return (
     <PageLayout>
-      <Head title='Магазин' />
+      <Head title={select.lang.store} />
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-        sum={select.sum} />
+        sum={select.sum} textButton={select.lang.follow}/>
       <List list={select.list} renderItem={renders.item} />
       <Pagination totalPages={Math.ceil(Number(select.count) / 10)} currentPageIndex={Number(page)} />
     </PageLayout>

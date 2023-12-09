@@ -7,6 +7,7 @@ import useStore from "../../store/use-store";
 function Language() {
   const cn = bem('language');
   const store = useStore();
+
   const select = useSelector(state => ({
     lang: state.language.lang
   }));

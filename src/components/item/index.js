@@ -23,7 +23,7 @@ function Item(props) {
       </div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
-        <button onClick={callbacks.onAdd}>Добавить</button>
+        <button onClick={callbacks.onAdd}>{props.textButton}</button>
       </div>
     </div>
   );
@@ -33,9 +33,10 @@ Item.propTypes = {
   item: PropTypes.shape({
     _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,
-    price: PropTypes.number
+    price: PropTypes.number,
   }).isRequired,
   onAdd: PropTypes.func,
+  textButton: PropTypes.string
 };
 
 Item.defaultProps = {
