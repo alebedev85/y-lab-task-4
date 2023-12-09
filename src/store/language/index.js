@@ -5,30 +5,27 @@ class Language extends StoreModule {
 
   initState() {
     return {
-      language: {
-        lang: 'ru',
-        list: {
-          store: 'Магазин',
-          add: 'Добавить',
-          delete: 'Удалить',
-          follow: 'Перейти',
-          close: 'Закрыть'
-        }
+      lang: 'ru',
+      list: {
+        store: 'Магазин',
+        add: 'Добавить',
+        delete: 'Удалить',
+        follow: 'Перейти',
+        close: 'Закрыть'
       }
     }
   }
 
-  SwitchLanguage() {
+  switchLanguage() {
     this.setState({
-      lang: this.getState().language.lang === 'ru' ? 'en' : 'ru',
+      lang: this.getState().lang === 'ru' ? 'en' : 'ru',
     })
   }
 
   setLanguage() {
-    if (this.getState().language.lang === 'ru') {
+    if (this.getState().lang === 'ru') {
       this.setState({
         ...this.getState(),
-        language: {
           lang: 'ru',
           list: {
             store: 'Магазин',
@@ -37,12 +34,11 @@ class Language extends StoreModule {
             follow: 'Перейти',
             close: 'Закрыть'
           }
-        }
-      })
+
+      }, 'Переключен язык на на руский')
     } else {
       this.setState({
         ...this.getState(),
-        language: {
           lang: 'en',
           list: {
             store: 'Store',
@@ -51,8 +47,7 @@ class Language extends StoreModule {
             follow: 'Follow',
             close: 'Close'
           }
-        }
-      })
+      }, 'Переключен язык на английски')
     }
   }
 

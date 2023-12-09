@@ -12,8 +12,6 @@ function Product() {
   const store = useStore();
   const { id } = useParams();
 
-  const [data, setData] = useState({});
-
   useEffect(() => {
     store.actions.catalog.loadItemData(id)
   }, []);
@@ -33,7 +31,7 @@ function Product() {
 
   return (
     <PageLayout>
-      <Head title={data.title} />
+      <Head title={select.product.title} />
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
         sum={select.sum} />
       <ProductData product={select.product} onAddItem={callbacks.addToBasket} />
