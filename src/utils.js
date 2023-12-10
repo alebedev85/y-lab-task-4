@@ -1,3 +1,5 @@
+import languages from "./languages.json";
+
 /**
  * Плюрализация
  * Возвращает вариант с учётом правил множественного числа под указанную локаль
@@ -58,4 +60,8 @@ export function pagesListGenerator(currentPageIndex, totalPages) {
   currentPage -= 1;
 
   return { pages, currentPage }
+}
+
+export function getTranslation(lang) {
+  return languages[lang];
 }
