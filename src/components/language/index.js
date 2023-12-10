@@ -13,16 +13,17 @@ function Language() {
   }));
 
   const callbacks = {
-    switchLanguage: () => store.actions.language.switchLanguage(),
+    switchLanguageRu: () => store.actions.language.switchLanguage('ru'),
+    switchLanguageEn: () => store.actions.language.switchLanguage('en'),
   }
 
   return (
     <ul className={cn()}>
       <li key={'ru'}>
-        <button className={cn('button', select.lang === 'ru' ? 'active' : '')} onClick={callbacks.switchLanguage}> RU </button>
+        <button className={cn('button', select.lang === 'ru' ? 'active' : '')} onClick={callbacks.switchLanguageRu}> RU </button>
       </li>
       <li key={'en'}>
-        <button className={cn('button', select.lang === 'en' ? 'active' : '')} onClick={callbacks.switchLanguage}> EN </button>
+        <button className={cn('button', select.lang === 'en' ? 'active' : '')} onClick={callbacks.switchLanguageEn}> EN </button>
       </li>
     </ul >
   )

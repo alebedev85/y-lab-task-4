@@ -1,4 +1,5 @@
 import StoreModule from "../module";
+import { getTranslation } from "../../utils"
 
 
 class Language extends StoreModule {
@@ -6,19 +7,15 @@ class Language extends StoreModule {
   initState() {
     return {
       lang: 'ru',
+      list: getTranslation('ru')
     }
   }
 
-  switchLanguage() {
-    if (this.getState().lang === 'en') {
+  switchLanguage(lang) {
       this.setState({
-        lang: 'ru',
-      }, 'Переключился на на руский язык')
-    } else {
-      this.setState({
-        lang: 'en',
-      }, 'Переключился на английски язык')
-    }
+        lang: lang,
+        list: getTranslation(lang)
+      }, 'Переключился язык')
   }
 
 }
