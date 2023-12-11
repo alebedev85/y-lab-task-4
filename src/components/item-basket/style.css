@@ -13,13 +13,11 @@
 .ItemBasket-title {
   width: 100%;
   padding: 20px 10px;
-  pointer-events: all;
 }
 .ItemBasket-link {
   color: inherit;
   text-decoration: none;
   cursor: pointer;
-  pointer-events: all;
 }
 
 .ItemBasket-link:hover {
