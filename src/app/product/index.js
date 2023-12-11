@@ -14,7 +14,7 @@ function Product() {
 
   useEffect(() => {
     store.actions.catalog.loadItemData(id)
-  }, []);
+  }, [id]);
 
   const select = useSelector(state => ({
     product: state.catalog.product,
